@@ -5,11 +5,46 @@ public class Card {
     private String pattern;
     private String ggut;
 
-    public Card(String pattern, String ggut) {
-        this.pattern = pattern;
-        this.ggut = ggut;
+    private int point;
+
+    public int getPoint() {
+        return point;
     }
 
+    public Card(String pattern, int index) {
+        this.pattern = pattern;
+        this.ggut = numberToGgut(index);
+        this.point = numberToPoint(index);
+    }
+
+    private static String numberToGgut(int number) {
+        String ggut;
+
+        switch (number) {
+            case 1:
+                ggut = "A";
+                break;
+            case 11:
+                ggut = "J";
+                break;
+            case 12:
+                ggut = "Q";
+                break;
+            case 13:
+                ggut = "K";
+                break;
+            default:
+                ggut = String.valueOf(number);
+        }
+        return ggut;
+    }
+
+    private int numberToPoint(int number) {
+        if (number >= 11) {
+            return 10;
+        }
+        return number;
+    }
     public String getPattern() {
         return pattern;
     }

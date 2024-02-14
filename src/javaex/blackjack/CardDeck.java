@@ -2,6 +2,7 @@ package javaex.blackjack;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,37 +16,17 @@ public class CardDeck {
     }
 
     private List<Card> generateCards() {
-        List<Card> cards = new ArrayList<>();
+        List<Card> cards = new LinkedList<>();
+
         for (String pattern : PATTERNS) {
             for (int i = 1; i <= CARD_COUNT; i++) {
-                Card card = new Card(pattern,getGgut(i));
+                Card card = new Card(pattern, i);
                 cards.add(card);
             }
         }
         return cards;
     }
 
-    private static String getGgut(int i) {
-        String ggut;
-
-        switch (i) {
-            case 1:
-                ggut = "A";
-                break;
-            case 11:
-                ggut = "J";
-                break;
-            case 12:
-                ggut = "Q";
-                break;
-            case 13:
-                ggut = "K";
-                break;
-            default:
-                ggut = String.valueOf(i);
-        }
-        return ggut;
-    }
     public Card drawCard() {
         Card randomCard = getRandomCard();
         cards.remove(randomCard);
@@ -56,6 +37,8 @@ public class CardDeck {
         int random = (int) (Math.random() * cards.size());
         return cards.get(random);
     }
+
+
 
     @Override
     public String toString() {
